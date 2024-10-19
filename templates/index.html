@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            text-align: center;
+        }
+
+        .search-input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .search-results {
+            margin-top: 20px;
+            text-align: center;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Document Search</h1>
+            <p>Find what you're looking for</p>
+        </div>
+        <input type="text" id="query" class="search-input" name="query" placeholder="Enter your search query">
+        <button type="submit" class="search-button" onclick="getresult()">Search</button>
+        <div id="load" style="display: none;">
+            <img src="load-37_256.gif" height="100" width="100" style="margin-left: 35%;margin-top: 20px;"/>
+        </div>
+        <div id="search-results" class="search-results"></div>
+    </div>
+
+    <script>
+        function getresult() {
+            var question = document.getElementById("query").value;
+            var load=document.getElementById("load");
+            var resulttag=document.getElementById("search-results");
+            load.style.display="block";
+            resulttag.style.display="none";
+            var requestBody = {
+                "question": question
+            };
+            $.ajax({
+                url: 'http://127.0.0.1:5000/question',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(requestBody),
+                success: function (response) {
+                    load.style.display="none";
+                    resulttag.style.display="block";
+                    var ans=response.answer
+                    console.log(response);
+                    resulttag.innerHTML = ans;
+                },
+                error: function (xhr, status, error) {
+                    load.style.display="none";
+                    resulttag.style.display="block";
+                    resulttag.innerHTML = "Please Try Again !!";
+                }
+            });
+
+        }
+
+    </script>
+</body>
+
+</html>
