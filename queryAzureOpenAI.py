@@ -13,9 +13,9 @@ import time
 
 openai.api_type = "azure"
 openai.api_version = "2022-12-01"
-openai.api_base = "https://saurav.openai.azure.com/"
-os.environ['OPENAI_API_KEY']="67bfdc8b80324eb385349ca8a1459f14"
-deployment_name = "gpt-35-turbo"
+openai.api_base = "https://{resourcename}.openai.azure.com/"
+os.environ['OPENAI_API_KEY']="Azure Open AI Key"
+deployment_name = "gpt-35-turbo" #model name
 llm = AzureOpenAI(deployment_name=deployment_name)
 llm_predictor = LLMPredictor(llm=llm)
 prompt_helper = PromptHelper(max_input_size=100, num_output=20, max_chunk_overlap=20, chunk_size_limit=100)
