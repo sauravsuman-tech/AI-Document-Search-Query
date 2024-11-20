@@ -5,7 +5,7 @@ from llama_index.node_parser import SimpleNodeParser
 from langchain import OpenAI
 import os
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = 'your open api key'
 llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-moderation-007"))
 directory_path="data"
 file_metadata = lambda x: {"filename": x}
