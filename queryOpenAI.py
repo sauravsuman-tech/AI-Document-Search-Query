@@ -6,7 +6,7 @@ from langchain.chat_models import ChatOpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
 
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = 'open api key'
 llm = ChatOpenAI(model_name="gpt-3.5-turbo")
 llm_predictor = LLMPredictor(llm=llm)
 prompt_helper = PromptHelper(max_input_size=3000, num_output=20, max_chunk_overlap=20, chunk_size_limit=1000)
